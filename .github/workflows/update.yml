@@ -1,9 +1,15 @@
-name: Update Website
+name: Update
 on:
   schedule:
-    # actually, ~5 minutes is the highest
-    # effective frequency you will get
     - cron: '* * * * *'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
 
 jobs:
   update:
@@ -15,7 +21,7 @@ jobs:
           # config
           git config --global user.name 'Pipeline'
           git config --global user.email 'info@bodyassist.app'
-          git remote add upstream https://github.com/tobiasbenkner/app.bodyasssist.app.git
+          git remote add upstream git@github.com:tobiasbenkner/app.bodyasssist.app.git
 
           # merge
           git checkout gh-pages
