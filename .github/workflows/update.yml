@@ -17,6 +17,12 @@ jobs:
           git config --global user.email 'info@bodyassist.app'
           git remote add upstream https://github.com/tobiasbenkner/app.bodyasssist.app.git
 
+          # merge
           git checkout gh-pages
-          git pull -X theirs upstream/gh-pages
+          git fetch upstream
+          git merge -X theirs upstream/gh-pages
+
+          echo "test"
+          echo ${{ github.event.repository.name }}
+
           git push
