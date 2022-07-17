@@ -21,14 +21,18 @@ jobs:
           # config
           git config --global user.name 'Pipeline'
           git config --global user.email 'info@bodyassist.app'
-          git remote add upstream git@github.com:tobiasbenkner/app.bodyasssist.app.git
+
+          # set upstream
+          git remote add upstream https://github.com/tobiasbenkner/app.bodyasssist.app.git
+          git fetch upstream
 
           # merge
           git checkout gh-pages
-          git fetch upstream
           git merge -X theirs upstream/gh-pages
 
+          # overwrite CNAME
           echo "test"
           echo ${{ github.event.repository.name }}
 
+          # push updates
           git push
