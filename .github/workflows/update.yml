@@ -23,7 +23,7 @@ jobs:
           # merge
           echo "merge"
           git checkout gh-pages
-          git merge -X theirs upstream/gh-pages
+          git merge -X theirs --allow-unrelated-histories upstream/gh-pages
 
           # overwrite CNAME
           echo "overwrite CNAME"
