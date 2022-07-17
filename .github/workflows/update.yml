@@ -8,14 +8,12 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Merge upstream
         run: |
           # config
           git config --global user.name 'Pipeline'
           git config --global user.email 'info@bodyassist.app'
-
-          git pull --unshallow
 
           # set upstream
           echo "set upstream"
@@ -33,6 +31,11 @@ jobs:
           cat CNAME
 
           # push updates
-          echo "commit changes and push"
-          git commit -m -a "merge"
+          echo "status"
+          git status
+          echo "add"
+          git add .
+          echo "commit"
+          git commit -m "update fork"
+          echo "push"
           git push
