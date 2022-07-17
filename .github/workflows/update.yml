@@ -1,0 +1,29 @@
+name: Update Website
+on:
+  schedule:
+    # actually, ~5 minutes is the highest
+    # effective frequency you will get
+    - cron: '* * * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Merge upstream
+        run: |
+          # config
+          git config --global user.name 'Pipeline'
+          git config --global user.email 'info@bodyassist.app'
+          git remote add upstream https://github.com/tobiasbenkner/app.bodyasssist.app.git
+
+          # "git checkout master" is unnecessary, already here by default
+          # this option is very important, you would get
+          # complains about unrelated histories without it.
+          # (but actions/checkout@v2 can also be instructed
+          # to fetch all git depth right from the start)
+          # git pull --unshallow
+
+          git checkout gh-pages
+          git pull -X theirs upstream/master
+          git push
