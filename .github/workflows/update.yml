@@ -3,13 +3,6 @@ on:
   schedule:
     - cron: '* * * * *'
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'
 
 jobs:
   update:
@@ -31,8 +24,8 @@ jobs:
           git merge -X theirs upstream/gh-pages
 
           # overwrite CNAME
-          echo "test"
-          echo ${{ github.event.repository.name }}
+          echo ${{ github.event.repository.name }} > CNAME
 
           # push updates
+          git commit -m -a "merge"
           git push
