@@ -18,7 +18,9 @@ jobs:
 
           git checkout gh-pages
           git merge -X theirs --allow-unrelated-histories --no-commit upstream/gh-pages
+
           echo ${{ github.event.repository.name }} > CNAME
+          git checkout HEAD -- assets
 
           if [ -n "$(git status --porcelain)" ]; then
             git add .;
